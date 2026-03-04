@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ЛАБА 4: Тёмная тема — переопределение цветов для ночного режима -->
+    <color name="primary">#FFBB86FC</color>
+    <color name="primary_variant">#FF6200EE</color>
+    <color name="on_primary">#FF000000</color>
+
+    <color name="secondary">#FF03DAC6</color>
+    <color name="secondary_variant">#FF03DAC6</color>
+    <color name="on_secondary">#FF000000</color>
+
+    <color name="background">#FF121212</color>
+    <color name="surface">#FF1E1E1E</color>
+    <color name="on_background">#FFFFFFFF</color>
+    <color name="on_surface">#FFFFFFFF</color>
+    <color name="on_surface_variant">#FFCAC4D0</color>
+
+    <color name="error">#FFF2B8B5</color>
+    <color name="on_error">#FF601410</color>
+
+    <color name="primary_container">#FF4A148C</color>
+    <color name="on_primary_container">#FFE8DEF8</color>
+    <color name="secondary_container">#FF1B5E20</color>
+    <color name="surface_variant">#FF2C2C2C</color>
+
+    <color name="completion_high">#FF66BB6A</color>
+    <color name="completion_medium">#FFFFA726</color>
+    <color name="completion_low">#FFEF5350</color>
+
+    <color name="nav_selected">#FFBB86FC</color>
+    <color name="nav_unselected">#FF9E9E9E</color>
+</resources>

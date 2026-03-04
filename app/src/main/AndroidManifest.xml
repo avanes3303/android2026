@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Лаба 3: разрешения для сетевых запросов -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+
+        <!-- Главная Activity — точка входа, хостит фрагменты через BottomNavigation -->
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            DetailActivity — экран деталей челленджа.
+            launchMode="singleTop" — если Activity уже на вершине стека, не создаётся
+            заново, а вызывается onNewIntent(). Это предотвращает создание дублей
+            при повторном открытии того же челленджа (например, из уведомления).
+        -->
+        <activity
+            android:name=".presentation.detail.DetailActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:label="@string/detail_title"
+            android:parentActivityName=".presentation.main.MainActivity" />
+    </application>
+
+</manifest>

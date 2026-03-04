@@ -1,0 +1,42 @@
+[
+  {
+    "id": "c_fitness",
+    "emoji": "💪",
+    "title": "30 дней спорта",
+    "description": "Занимайся каждый день по 30 минут",
+    "category": "FITNESS",
+    "target_days": 30,
+    "streak_days": 7,
+    "completion_percent": 93
+  },
+  {
+    "id": "c_meditation",
+    "emoji": "🧘",
+    "title": "21 день медитации",
+    "description": "По 10 минут с утра — меняет жизнь",
+    "category": "MINDFULNESS",
+    "target_days": 21,
+    "streak_days": 3,
+    "completion_percent": 71
+  },
+  {
+    "id": "c_reading",
+    "emoji": "📚",
+    "title": "Чтение каждый день",
+    "description": "Всего одна глава — уже победа",
+    "category": "LEARNING",
+    "target_days": 30,
+    "streak_days": 14,
+    "completion_percent": 100
+  },
+  {
+    "id": "c_water",
+    "emoji": "💧",
+    "title": "2 литра воды в день",
+    "description": "Простая привычка, огромный эффект",
+    "category": "NUTRITION",
+    "target_days": 30,
+    "streak_days": 2,
+    "completion_percent": 57
+  }
+]

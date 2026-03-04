@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        ЛАБА 4: Общие стили — вынесены в отдельный файл,
+        не дублируются на каждом View.
+        Задел на Л6: стили готовы к выносу в дизайн-систему (субмодуль).
+    -->
+
+    <!-- Базовый стиль текста -->
+    <style name="TextStyle" />
+
+    <!-- Заголовок экрана -->
+    <style name="TextStyle.ScreenTitle">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/on_background</item>
+    </style>
+
+    <!-- Подзаголовок секции -->
+    <style name="TextStyle.SectionTitle">
+        <item name="android:textSize">@dimen/text_subheading</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/on_background</item>
+    </style>
+
+    <!-- Основной текст -->
+    <style name="TextStyle.Body">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <!-- Мелкий текст (подсказки, подписи) -->
+    <style name="TextStyle.Caption">
+        <item name="android:textSize">@dimen/text_body_small</item>
+        <item name="android:textColor">@color/on_surface_variant</item>
+    </style>
+
+    <!-- Карточка (MaterialCardView) -->
+    <style name="CardStyle">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="contentPadding">@dimen/card_padding</item>
+    </style>
+
+    <!-- Карточка с акцентным фоном -->
+    <style name="CardStyle.Primary">
+        <item name="cardBackgroundColor">@color/primary_container</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="contentPadding">@dimen/card_padding</item>
+    </style>
+
+    <!-- Процент выполнения (крупный) -->
+    <style name="TextStyle.Percent">
+        <item name="android:textSize">@dimen/text_percent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Summary chip value -->
+    <style name="TextStyle.SummaryValue">
+        <item name="android:textSize">@dimen/text_summary_value</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

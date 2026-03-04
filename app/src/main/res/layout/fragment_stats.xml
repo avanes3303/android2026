@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ЛАБА 3 + ЛАБА 4: StatsFragment layout
+    RecyclerView для списка привычек, карточка мотивации из API.
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_padding">
+
+        <TextView
+            android:id="@+id/tv_stats_title"
+            style="@style/TextStyle.ScreenTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- БЛОК 1: Мотивация дня (из API) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_motivation"
+            style="@style/CardStyle.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/tv_stats_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextStyle.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stats_motivation"
+                    android:textColor="@color/on_primary_container" />
+
+                <ProgressBar
+                    android:id="@+id/progress_quote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_quote"
+                    style="@style/TextStyle.Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:textColor="@color/on_primary_container"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_quote_error"
+                    style="@style/TextStyle.Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:textColor="@color/error"
+                    android:visibility="gone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_retry"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stats_retry"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:id="@+id/divider_stats1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/surface_variant"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/card_motivation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- БЛОК 2: Список привычек (RecyclerView — Л4) -->
+        <TextView
+            android:id="@+id/tv_my_habits"
+            style="@style/TextStyle.SectionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_my_habits"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/divider_stats1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_habits"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginTop="@dimen/spacing_sm"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_habits"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/divider_stats2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/surface_variant"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/rv_habits"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- БЛОК 3: Сводка в трёх карточках -->
+        <TextView
+            android:id="@+id/tv_summary_label"
+            style="@style/TextStyle.SectionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_summary"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:layout_constraintTop_toBottomOf="@id/divider_stats2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- include переиспользуемого компонента (Л4: <include>) -->
+        <include
+            android:id="@+id/summary_chips"
+            layout="@layout/include_summary_chips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            app:layout_constraintTop_toBottomOf="@id/tv_summary_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
