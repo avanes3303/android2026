@@ -9,32 +9,14 @@ import com.example.myapplication.presentation.home.HomeFragment
 import com.example.myapplication.presentation.profile.ProfileFragment
 import com.example.myapplication.presentation.stats.StatsFragment
 
-// =============================================================================
-// ЛАБА 2: MainActivity — точка входа в приложение
-//
-// Single Activity + Fragments паттерн:
-//  - BottomNavigationView переключает фрагменты
-//  - Lifecycle залогирован (видно в Logcat по тегу "MainActivity")
-//  - View Binding вместо findViewById
-//  - onSaveInstanceState сохраняет выбранную вкладку при повороте
-//
-// ЛАБА 2 §Context: используется Activity Context для FragmentManager
-// (корректно — фрагменты привязаны к Activity, а не к синглтону)
-// =============================================================================
-
 class MainActivity : AppCompatActivity() {
 
-    // View Binding — безопасный доступ к View без findViewById (Л2, Л4)
     private lateinit var binding: ActivityMainBinding
 
     companion object {
         const val TAG = "MainActivity"
         private const val KEY_SELECTED_TAB = "selected_tab_id"
     }
-
-    // -------------------------------------------------------------------------
-    // ЛАБА 2: Activity Lifecycle — каждый метод залогирован
-    // -------------------------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onDestroy")
     }
 
-    // ЛАБА 2: Сохранение состояния при повороте экрана
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(KEY_SELECTED_TAB, binding.bottomNavigation.selectedItemId)
@@ -87,10 +68,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onRestoreInstanceState")
     }
 
-    // -------------------------------------------------------------------------
-    // Navigation setup
-    // -------------------------------------------------------------------------
-
     private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             val fragment = when (item.itemId) {
@@ -100,9 +77,9 @@ class MainActivity : AppCompatActivity() {
                 else -> return@setOnItemSelectedListener false
             }
 
-            // ЛАБА 2: Fragment добавляется программно через FragmentManager
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
 
             true

@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ЛАБА 4: <merge> + <include> — переиспользуемый компонент сводки.
-    <merge> устраняет лишний уровень вложенности при include.
--->
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="3">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/spacing_xs"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardCornerRadius="@dimen/card_corner_radius">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,8 +41,7 @@
             android:layout_weight="1"
             android:layout_marginStart="@dimen/spacing_xs"
             android:layout_marginEnd="@dimen/spacing_xs"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardCornerRadius="@dimen/card_corner_radius">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,8 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="@dimen/spacing_xs"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardCornerRadius="@dimen/card_corner_radius">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,5 +91,4 @@
                     android:text="@string/stats_average" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
-</merge>
+</LinearLayout>

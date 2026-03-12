@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ЛАБА 2: DetailActivity — экран деталей челленджа
-    Данные приходят через Intent.putExtra().
--->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -71,7 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <!--
-                ЛАБА 4: Вложенный LinearLayout внутри ConstraintLayout — обоснование:
+                Вложенный LinearLayout внутри ConstraintLayout — обоснование:
                 Вертикальный список label:value пар проще и понятнее через LinearLayout,
                 чем через цепочки constraints для каждой строки.
             -->
@@ -119,7 +115,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Кнопка "Поделиться" — неявный Intent (Л2) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_share"
             android:layout_width="0dp"
@@ -127,6 +122,17 @@
             android:text="@string/detail_share"
             android:layout_marginTop="@dimen/spacing_xl"
             app:layout_constraintTop_toBottomOf="@id/card_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_complete"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_complete_today"
+            android:layout_marginTop="@dimen/spacing_sm"
+            app:layout_constraintTop_toBottomOf="@id/btn_share"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

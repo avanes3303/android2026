@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ЛАБА 3 + ЛАБА 4: StatsFragment layout
-    RecyclerView для списка привычек, карточка мотивации из API.
--->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- БЛОК 1: Мотивация дня (из API) -->
+        <!-- Мотивация дня (из API) -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_motivation"
             style="@style/CardStyle.Primary"
@@ -94,7 +90,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- БЛОК 2: Список привычек (RecyclerView — Л4) -->
+        <!-- Список привычек -->
         <TextView
             android:id="@+id/tv_my_habits"
             style="@style/TextStyle.SectionTitle"
@@ -126,7 +122,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- БЛОК 3: Сводка в трёх карточках -->
+        <!-- Сводка в трёх карточках -->
         <TextView
             android:id="@+id/tv_summary_label"
             style="@style/TextStyle.SectionTitle"
@@ -138,7 +134,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- include переиспользуемого компонента (Л4: <include>) -->
         <include
             android:id="@+id/summary_chips"
             layout="@layout/include_summary_chips"

@@ -6,11 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.domain.model.UserProfile
 import com.example.myapplication.domain.repository.HabitRepository
 
-// =============================================================================
-// ЛАБА 5: ViewModel для ProfileFragment
-// Данные приходят из Repository → JSON assets
-// =============================================================================
-
 class ProfileViewModel(
     private val repository: HabitRepository
 ) : ViewModel() {

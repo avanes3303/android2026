@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ЛАБА 4: RecyclerView item — строка привычки
-    ConstraintLayout для точного позиционирования.
-    View Binding в ViewHolder (не findViewById).
--->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

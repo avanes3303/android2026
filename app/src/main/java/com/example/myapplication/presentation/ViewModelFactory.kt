@@ -12,24 +12,26 @@ import com.example.myapplication.presentation.home.HomeViewModel
 import com.example.myapplication.presentation.profile.ProfileViewModel
 import com.example.myapplication.presentation.stats.StatsViewModel
 
-// =============================================================================
-// ЛАБА 5: DI через конструктор (без фреймворка)
-//
-// ViewModelFactory передаёт зависимости (Repository) в ViewModel.
-// Зависимости не создаются внутри ViewModel — передаются снаружи.
-//
-// В будущем заменяется на Hilt/Koin для автоматического DI.
-// =============================================================================
-
 class ViewModelFactory(context: Context) : ViewModelProvider.Factory {
 
-    // Используем applicationContext чтобы не держать ссылку на Activity (утечка памяти)
-    private val appContext = context.applicationContext
+    private val habitRepository: HabitRepository
+    private val quoteRepository: QuoteRepository
 
-    private val jsonDataProvider by lazy { JsonDataProvider(appContext) }
-    private val habitRepository: HabitRepository by lazy { HabitRepositoryImpl(jsonDataProvider) }
-    private val quoteRepository: QuoteRepository by lazy { QuoteRepositoryImpl() }
+    init {
+        val appContext = context.applicationContext
+        // Singleton — один экземпляр репозитория на всё приложение
+        synchronized(lock) {
+            if (_habitRepository == null) {
+                val jsonDataProvider = JsonDataProvider(appContext)
+                _habitRepository = HabitRepositoryImpl(jsonDataProvider)
+                _quoteRepository = QuoteRepositoryImpl()
+            }
+        }
+        habitRepository = _habitRepository!!
+        quoteRepository = _quoteRepository!!
+    }
 
+    // Приведение к T безопасно — тип проверен через isAssignableFrom
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T = when {
         modelClass.isAssignableFrom(HomeViewModel::class.java) ->
@@ -39,5 +41,11 @@ class ViewModelFactory(context: Context) : ViewModelProvider.Factory {
         modelClass.isAssignableFrom(ProfileViewModel::class.java) ->
             ProfileViewModel(habitRepository) as T
         else -> throw IllegalArgumentException("Unknown ViewModel: ${modelClass.name}")
+    }
+
+    companion object {
+        private val lock = Any()
+        private var _habitRepository: HabitRepository? = null
+        private var _quoteRepository: QuoteRepository? = null
     }
 }

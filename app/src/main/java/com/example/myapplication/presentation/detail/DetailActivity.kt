@@ -8,24 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityDetailBinding
 
-// =============================================================================
-// ЛАБА 2: DetailActivity — экран деталей челленджа
-//
-// Демонстрация:
-//  - Явный Intent с putExtra для передачи данных (§Intent)
-//  - Неявный Intent для шаринга (§Intent)
-//  - launchMode="singleTop" в манифесте + onNewIntent (§Back Stack)
-//  - Lifecycle logging
-//  - View Binding
-// =============================================================================
-
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
 
     companion object {
         const val TAG = "DetailActivity"
-        // Ключи для Intent.putExtra — константы в companion object
         const val EXTRA_EMOJI = "extra_emoji"
         const val EXTRA_TITLE = "extra_title"
         const val EXTRA_DESCRIPTION = "extra_description"
@@ -68,10 +56,10 @@ class DetailActivity : AppCompatActivity() {
         displayChallengeDetails()
         setupShareButton()
         setupBackButton()
+        setupCompleteButton()
     }
 
-    // ЛАБА 2: onNewIntent — вызывается при launchMode="singleTop"
-    // когда Activity уже на вершине стека и открывается повторно
+    // Вызывается при launchMode="singleTop", когда Activity уже на вершине стека
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         Log.d(TAG, "onNewIntent — Activity переиспользована (singleTop)")
@@ -86,7 +74,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onDestroy() { super.onDestroy(); Log.d(TAG, "onDestroy") }
 
     private fun displayChallengeDetails() {
-        // ЛАБА 2: Получение данных из Intent через getStringExtra / getIntExtra
         val emoji = intent.getStringExtra(EXTRA_EMOJI) ?: ""
         val title = intent.getStringExtra(EXTRA_TITLE) ?: ""
         val description = intent.getStringExtra(EXTRA_DESCRIPTION) ?: ""
@@ -110,7 +97,6 @@ class DetailActivity : AppCompatActivity() {
             val title = intent.getStringExtra(EXTRA_TITLE) ?: ""
             val streak = intent.getIntExtra(EXTRA_STREAK_DAYS, 0)
 
-            // ЛАБА 2: Неявный Intent — открывает системный диалог шаринга
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
                 putExtra(Intent.EXTRA_TEXT, getString(R.string.detail_share_text, title, streak))
@@ -121,6 +107,16 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setupBackButton() {
         binding.btnBack.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun setupCompleteButton() {
+        binding.btnComplete.setOnClickListener {
+            val resultIntent = Intent().apply {
+                putExtra(EXTRA_TITLE, intent.getStringExtra(EXTRA_TITLE))
+            }
+            setResult(RESULT_OK, resultIntent)
             finish()
         }
     }

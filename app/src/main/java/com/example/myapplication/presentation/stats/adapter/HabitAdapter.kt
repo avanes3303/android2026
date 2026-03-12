@@ -10,26 +10,15 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.ItemHabitBinding
 import com.example.myapplication.domain.model.HabitDisplayItem
 
-// =============================================================================
-// ЛАБА 4: RecyclerView Adapter
-//
-// Демонстрация:
-//  - ListAdapter с DiffUtil.ItemCallback для эффективного обновления
-//  - ViewHolder с View Binding (не itemView.findViewById)
-//  - inflate с attachToRoot = false (обязательное требование)
-//  - Отступы и размеры из dimens.xml
-// =============================================================================
-
 class HabitAdapter(
     private val onItemClick: (HabitDisplayItem) -> Unit = {}
 ) : ListAdapter<HabitDisplayItem, HabitAdapter.HabitViewHolder>(HabitDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder {
-        // ЛАБА 4: inflate с parent и attachToRoot = false
         val binding = ItemHabitBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false   // attachToRoot = false — обязательно для RecyclerView
+            false
         )
         return HabitViewHolder(binding)
     }
@@ -38,7 +27,6 @@ class HabitAdapter(
         holder.bind(getItem(position))
     }
 
-    // ViewHolder с View Binding
     inner class HabitViewHolder(
         private val binding: ItemHabitBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -74,7 +62,6 @@ class HabitAdapter(
     }
 }
 
-// ЛАБА 4: DiffUtil для эффективного обновления списка
 class HabitDiffCallback : DiffUtil.ItemCallback<HabitDisplayItem>() {
     override fun areItemsTheSame(old: HabitDisplayItem, new: HabitDisplayItem): Boolean =
         old.title == new.title

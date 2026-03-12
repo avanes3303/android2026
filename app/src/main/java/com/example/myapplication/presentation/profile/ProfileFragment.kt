@@ -14,13 +14,6 @@ import com.example.myapplication.databinding.FragmentProfileBinding
 import com.example.myapplication.domain.model.ProfileStat
 import com.example.myapplication.presentation.ViewModelFactory
 
-// =============================================================================
-// ЛАБА 2: ProfileFragment
-//
-// Данные профиля приходят из ViewModel → Repository → JSON assets.
-// Fragment наблюдает за LiveData и только обновляет UI — бизнес-логики нет.
-// =============================================================================
-
 class ProfileFragment : Fragment() {
 
     companion object {

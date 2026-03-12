@@ -46,4 +46,12 @@
     <string name="detail_share">Поделиться</string>
     <string name="detail_share_text">Я выполняю челлендж «%1$s» в HabitTracker! Стрик: %2$d дней</string>
     <string name="detail_back">Назад</string>
+
+    <!-- Add challenge dialog -->
+    <string name="add_challenge">Добавить челлендж</string>
+    <string name="dialog_add_title">Новый челлендж</string>
+    <string name="hint_challenge_name">Название челленджа</string>
+    <string name="dialog_add_ok">Добавить</string>
+    <string name="dialog_add_cancel">Отмена</string>
+    <string name="btn_complete_today">Выполнено сегодня ✓</string>
 </resources>

@@ -1,22 +1,5 @@
 package com.example.myapplication.domain.model
 
-// =============================================================================
-// ЛАБА 1: Kotlin — бизнес-модели трекера привычек
-//
-// Демонстрация ключевых концепций языка:
-//  §1  — Классы с primary / secondary конструктором
-//  §2  — Data-классы (copy, деструктуризация)
-//  §3  — Наследование (open, abstract, override, final override, super)
-//  §6  — Sealed-классы (состояния + when без else)
-//  §7  — Enum-классы (с конструктором, с анонимным классом)
-//  §8  — Вложенные (nested) и внутренние (inner) классы
-//  §12 — Nullable-типы (?., ?:, let, !!)
-// =============================================================================
-
-// ---------------------------------------------------------------------------
-// §7: ENUM CLASS — с конструктором и анонимным классом
-// ---------------------------------------------------------------------------
-
 enum class HabitFrequency(val displayName: String, val timesPerWeek: Int) {
     DAILY("Каждый день", 7),
     WEEKDAYS("По будням", 5),
@@ -28,7 +11,6 @@ enum class HabitFrequency(val displayName: String, val timesPerWeek: Int) {
 
 enum class ChallengeCategory(val emoji: String, val displayName: String) {
     FITNESS("💪", "Спорт") {
-        // §7: Анонимный класс — одна константа переопределяет метод
         override fun motivationalPhrase(): String = "Движение — это жизнь!"
     },
     MINDFULNESS("🧘", "Медитация"),
@@ -41,16 +23,9 @@ enum class ChallengeCategory(val emoji: String, val displayName: String) {
     open fun motivationalPhrase(): String = "Продолжай в том же духе!"
 }
 
-// ---------------------------------------------------------------------------
-// §6: SEALED CLASS — состояния челленджа
-// when без else — компилятор проверяет полноту вариантов
-// ---------------------------------------------------------------------------
-
 sealed class ChallengeState {
-    // object — синглтон-состояние (без данных)
     object NotStarted : ChallengeState()
 
-    // data class внутри sealed — содержит данные о прогрессе
     data class InProgress(
         val daysCompleted: Int,
         val totalDays: Int
@@ -69,17 +44,11 @@ sealed class ChallengeState {
     fun isActive(): Boolean = this is InProgress
 }
 
-// Sealed class для результата API-запроса (используется как UI State в Л3)
 sealed class ApiResult<out T> {
     data class Success<T>(val data: T) : ApiResult<T>()
     data class Error(val message: String, val code: Int? = null) : ApiResult<Nothing>()
     object Loading : ApiResult<Nothing>()
 }
-
-// ---------------------------------------------------------------------------
-// §3: ABSTRACT CLASS — наследование
-// Базовый класс для всех сущностей. Демонстрирует open/abstract/override/super.
-// ---------------------------------------------------------------------------
 
 abstract class BaseEntity(
     open val id: String,
@@ -87,51 +56,35 @@ abstract class BaseEntity(
 ) {
     abstract fun toDisplayString(): String
 
-    // open — может быть переопределён наследниками
     open fun entityType(): String = "BaseEntity"
 
     override fun toString(): String = toDisplayString()
 }
 
-// ---------------------------------------------------------------------------
-// §1 + §2 + §3 + §4 + §12: DATA CLASS (User)
-// Primary constructor, наследование, реализация двух интерфейсов,
-// final override, nullable-поля
-// ---------------------------------------------------------------------------
-
 data class User(
     override val id: String,
     val name: String,
     val email: String,
-    val avatarUrl: String? = null,          // §12: nullable-поле
+    val avatarUrl: String? = null,
     val memberSince: String? = null,
     override val createdAt: Long = System.currentTimeMillis()
 ) : BaseEntity(id, createdAt), Displayable, Trackable {
 
     override val trackingId: String get() = id
 
-    // §3: final override — запрещает дальнейшее переопределение в наследниках
-    final override fun toDisplayString(): String = "User(name=$name, email=$email)"
+    override fun toDisplayString(): String = "User(name=$name, email=$email)"
 
     override fun displayInfo(): String {
-        // §12: ?. (safe call) + ?: (Elvis) + let
         val avatar = avatarUrl?.let { url ->
             "Аватар: $url"
         } ?: "Аватар не задан"
         return "$name ($email) — $avatar"
     }
 
-    // Computed property
     val displayName: String get() = name.ifBlank { email.substringBefore("@") }
 
-    // §3: override + super — вызов метода родительского класса
     override fun entityType(): String = "${super.entityType()}/User"
 }
-
-// ---------------------------------------------------------------------------
-// §1: CLASS С SECONDARY CONSTRUCTOR
-// Дополнительные конструкторы для удобного создания — делегирование через this(...)
-// ---------------------------------------------------------------------------
 
 data class HabitEntry(
     override val id: String,
@@ -141,8 +94,6 @@ data class HabitEntry(
     val note: String = ""
 ) : BaseEntity(id, timestamp) {
 
-    // Secondary constructor — делегирует в primary через this(...)
-    // Логически оправдан: позволяет создать запись без ручного указания id и timestamp
     constructor(challengeId: String, completed: Boolean) : this(
         id = "${challengeId}_${System.currentTimeMillis()}",
         challengeId = challengeId,
@@ -150,7 +101,6 @@ data class HabitEntry(
         isCompleted = completed
     )
 
-    // Ещё один secondary constructor — добавляет заметку
     constructor(challengeId: String, completed: Boolean, note: String) : this(
         id = "${challengeId}_${System.currentTimeMillis()}",
         challengeId = challengeId,
@@ -165,12 +115,6 @@ data class HabitEntry(
     override fun entityType(): String = "HabitEntry"
 }
 
-// ---------------------------------------------------------------------------
-// §8 + §4: DATA CLASS с NESTED CLASS + реализация интерфейсов
-// Challenge реализует Displayable + Trackable (два интерфейса одновременно)
-// Содержит nested class Metadata и inner class ProgressTracker
-// ---------------------------------------------------------------------------
-
 data class Challenge(
     override val id: String,
     val title: String,
@@ -182,7 +126,6 @@ data class Challenge(
     val metadata: Metadata = Metadata()
 ) : BaseEntity(id), Displayable, Trackable, Summarizable {
 
-    // §4: Реализация интерфейсов
     override val trackingId: String get() = id
     override val summaryTitle: String get() = "${category.emoji} $title"
 
@@ -191,8 +134,7 @@ data class Challenge(
     override fun displayInfo(): String =
         "$summaryTitle — ${state.javaClass.simpleName}"
 
-    // §8: NESTED CLASS (без inner) — не держит ссылку на внешний класс
-    // Логически: Metadata — это просто контейнер данных, не зависит от Challenge
+    // Nested class — не держит ссылку на внешний класс
     data class Metadata(
         val color: String = "#6200EE",
         val isPublic: Boolean = true,
@@ -200,8 +142,7 @@ data class Challenge(
         val iconEmoji: String = "⭐"
     )
 
-    // §8: INNER CLASS — держит ссылку на внешний класс (обращается к полям Challenge)
-    // Логически: ProgressTracker работает именно с этим челленджем
+    // Inner class — держит ссылку на внешний класс (обращается к полям Challenge)
     inner class ProgressTracker {
         fun progressPercent(): Int = when (val s = state) {
             is ChallengeState.InProgress -> (s.daysCompleted * 100) / s.totalDays.coerceAtLeast(1)
@@ -220,10 +161,6 @@ data class Challenge(
     override fun entityType(): String = "Challenge"
 }
 
-// ---------------------------------------------------------------------------
-// DATA CLASS для статистики
-// ---------------------------------------------------------------------------
-
 data class HabitStats(
     val challengeId: String,
     val totalDays: Int,
@@ -237,10 +174,6 @@ data class HabitStats(
 
     val completionPercent: Int get() = (completionRate * 100).toInt()
 }
-
-// ---------------------------------------------------------------------------
-// §14: OBJECT как фабрика / валидатор (синглтон)
-// ---------------------------------------------------------------------------
 
 object ChallengeValidator {
     fun validate(title: String, targetDays: Int): ValidationResult {
@@ -258,10 +191,6 @@ object ChallengeValidator {
     }
 }
 
-// ---------------------------------------------------------------------------
-// DTO для отображения привычки в списке (используется в UI)
-// ---------------------------------------------------------------------------
-
 data class HabitDisplayItem(
     val emoji: String,
     val title: String,
@@ -271,10 +200,6 @@ data class HabitDisplayItem(
     val completionPercent: Int,
     val targetDays: Int
 )
-
-// ---------------------------------------------------------------------------
-// DTO для отображения профиля
-// ---------------------------------------------------------------------------
 
 data class UserProfile(
     val name: String,

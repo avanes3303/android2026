@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ЛАБА 2 + ЛАБА 4: HomeFragment layout
-    ConstraintLayout с хардкоженным текстом, инпутом, кнопкой, часами.
--->
-<ScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/screen_padding">
 
-        <!-- 1. Хардкоженный заголовок и описание -->
         <TextView
             android:id="@+id/tv_title"
             style="@style/TextStyle.ScreenTitle"
@@ -38,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- 2. Живые часы -->
+        <!-- Живые часы -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_clock"
             android:layout_width="0dp"
@@ -85,7 +84,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- 3. Поле ввода + кнопка -->
+        <!-- Поле ввода + кнопка -->
         <TextView
             android:id="@+id/tv_ask_name"
             style="@style/TextStyle.SectionTitle"
@@ -160,7 +159,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- 4. Список популярных челленджей -->
+        <!-- Список популярных челленджей -->
         <TextView
             android:id="@+id/tv_popular"
             style="@style/TextStyle.SectionTitle"
@@ -172,7 +171,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- RecyclerView для челленджей (переиспользуемый список) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_challenges"
             android:layout_width="0dp"
@@ -185,4 +183,15 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacing_lg"
+        android:contentDescription="@string/add_challenge"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

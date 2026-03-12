@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ЛАБА 4: Тёмная тема — переопределение цветов для ночного режима -->
     <color name="primary">#FFBB86FC</color>
     <color name="primary_variant">#FF6200EE</color>
     <color name="on_primary">#FF000000</color>

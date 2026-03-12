@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ItemChallengeBinding
 import com.example.myapplication.domain.model.HabitDisplayItem
 
-// Adapter для списка челленджей на HomeScreen
-
 class ChallengeAdapter(
     private val onItemClick: (HabitDisplayItem) -> Unit = {}
 ) : ListAdapter<HabitDisplayItem, ChallengeAdapter.ChallengeViewHolder>(ChallengeDiffCallback()) {

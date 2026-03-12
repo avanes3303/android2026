@@ -10,29 +10,17 @@ import com.example.myapplication.domain.repository.HabitRepository
 import com.example.myapplication.domain.repository.QuoteRepository
 import kotlinx.coroutines.launch
 
-// =============================================================================
-// ЛАБА 3 + ЛАБА 5: ViewModel + LiveData + Coroutines
-//
-// ViewModel — хранит UI-состояние, переживает повороты экрана.
-// LiveData — реактивные данные: UI (Fragment) подписывается через observe().
-// viewModelScope — корутина привязана к жизненному циклу ViewModel.
-// ViewModel НЕ держит ссылку на Context, View или Fragment.
-// =============================================================================
-
 class StatsViewModel(
     private val habitRepository: HabitRepository,
     private val quoteRepository: QuoteRepository
 ) : ViewModel() {
 
-    // --- Состояние цитаты (из API) ---
     private val _quoteState = MutableLiveData<ApiResult<String>>(ApiResult.Loading)
     val quoteState: LiveData<ApiResult<String>> = _quoteState
 
-    // --- Список привычек (из JSON) ---
     private val _habits = MutableLiveData<List<HabitDisplayItem>>()
     val habits: LiveData<List<HabitDisplayItem>> = _habits
 
-    // --- Сводная статистика (вычисляется из данных, не хардкод) ---
     private val _summaryCount = MutableLiveData<String>()
     val summaryCount: LiveData<String> = _summaryCount
 

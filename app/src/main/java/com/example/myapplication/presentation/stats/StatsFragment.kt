@@ -7,24 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentStatsBinding
 import com.example.myapplication.domain.model.ApiResult
 import com.example.myapplication.presentation.ViewModelFactory
 import com.example.myapplication.presentation.detail.DetailActivity
 import com.example.myapplication.presentation.stats.adapter.HabitAdapter
-
-// =============================================================================
-// ЛАБА 3 + ЛАБА 4: StatsFragment
-//
-// Демонстрация:
-//  - RecyclerView со списком привычек (Л4)
-//  - Данные из API через ViewModel (Л3)
-//  - Sealed class ApiResult управляет видимостью UI-элементов (Л3)
-//  - ProgressBar во время загрузки, ошибка с кнопкой повтора
-//  - Fragment добавляется программно через FragmentManager (Л2)
-//  - addToBackStack для кнопки «Назад» (Л2)
-// =============================================================================
 
 class StatsFragment : Fragment() {
 
@@ -78,6 +67,7 @@ class StatsFragment : Fragment() {
         binding.rvHabits.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = habitAdapter
+            addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         }
     }
 
@@ -88,7 +78,6 @@ class StatsFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // ЛАБА 3: Sealed class ApiResult управляет видимостью элементов
         viewModel.quoteState.observe(viewLifecycleOwner) { state ->
             // Сбрасываем видимость
             binding.progressQuote.visibility = View.GONE
@@ -96,7 +85,6 @@ class StatsFragment : Fragment() {
             binding.tvQuoteError.visibility = View.GONE
             binding.btnRetry.visibility = View.GONE
 
-            // ЛАБА 1 §6: when по sealed class без else
             when (state) {
                 is ApiResult.Loading -> {
                     binding.progressQuote.visibility = View.VISIBLE

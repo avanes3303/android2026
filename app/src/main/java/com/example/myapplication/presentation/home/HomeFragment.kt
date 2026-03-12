@@ -1,10 +1,13 @@
 package com.example.myapplication.presentation.home
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,19 +17,7 @@ import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.domain.model.HabitDisplayItem
 import com.example.myapplication.presentation.ViewModelFactory
 import com.example.myapplication.presentation.detail.DetailActivity
-
-// =============================================================================
-// ЛАБА 2: HomeFragment
-//
-// Демонстрация:
-//  - Fragment с собственным layout
-//  - Lifecycle: onCreateView, onViewCreated, onDestroyView залогированы
-//  - View Binding: _binding / binding паттерн, _binding = null в onDestroyView
-//  - TextView с хардкоженным текстом из бизнес-логики
-//  - EditText + Button → результат в TextView
-//  - TextClock как интерактивный элемент
-//  - Переход на DetailActivity через явный Intent с putExtra
-// =============================================================================
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HomeFragment : Fragment() {
 
@@ -34,8 +25,7 @@ class HomeFragment : Fragment() {
         const val TAG = "HomeFragment"
     }
 
-    // View Binding: nullable поле + non-null accessor
-    // _binding обнуляется в onDestroyView чтобы избежать утечек памяти (Л2)
+    // Обнуляется в onDestroyView чтобы избежать утечек памяти
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -43,9 +33,17 @@ class HomeFragment : Fragment() {
         ViewModelFactory(requireContext())
     }
 
+    private val detailLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val title = result.data?.getStringExtra(DetailActivity.EXTRA_TITLE) ?: return@registerForActivityResult
+            viewModel.completeDay(title)
+        }
+    }
+
     private lateinit var challengeAdapter: ChallengeAdapter
 
-    // ЛАБА 2: Fragment Lifecycle — onCreateView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,21 +54,20 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    // ЛАБА 2: Fragment Lifecycle — onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated")
 
         setupNameInput()
         setupChallengesList()
+        setupAddButton()
         observeViewModel()
     }
 
-    // ЛАБА 2: Fragment Lifecycle — onDestroyView + обнуление binding
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d(TAG, "onDestroyView")
-        _binding = null   // Обязательно! Предотвращает утечки памяти
+        _binding = null
     }
 
     private fun setupNameInput() {
@@ -93,7 +90,6 @@ class HomeFragment : Fragment() {
 
     private fun setupChallengesList() {
         challengeAdapter = ChallengeAdapter { item ->
-            // ЛАБА 2: Переход на DetailActivity через явный Intent с putExtra
             val intent = DetailActivity.newIntent(
                 context = requireContext(),
                 emoji = item.emoji,
@@ -104,7 +100,7 @@ class HomeFragment : Fragment() {
                 streakDays = item.streakDays,
                 completion = item.completionPercent
             )
-            startActivity(intent)
+            detailLauncher.launch(intent)
         }
 
         binding.rvChallenges.apply {
@@ -113,8 +109,27 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setupAddButton() {
+        binding.fabAdd.setOnClickListener {
+            val editText = EditText(requireContext()).apply {
+                hint = getString(R.string.hint_challenge_name)
+                setPadding(64, 32, 64, 32)
+            }
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.dialog_add_title))
+                .setView(editText)
+                .setPositiveButton(getString(R.string.dialog_add_ok)) { _, _ ->
+                    val name = editText.text.toString().trim()
+                    if (name.isNotBlank()) {
+                        viewModel.addChallenge(name, "⭐", "Другое")
+                    }
+                }
+                .setNegativeButton(getString(R.string.dialog_add_cancel), null)
+                .show()
+        }
+    }
+
     private fun observeViewModel() {
-        // ЛАБА 5: Fragment ТОЛЬКО наблюдает за данными (observe) и обновляет UI
         viewModel.challenges.observe(viewLifecycleOwner) { challenges ->
             challengeAdapter.submitList(challenges)
         }
