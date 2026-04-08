@@ -22,7 +22,8 @@
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/circular_progress"
+            android:layout_marginEnd="@dimen/spacing_sm" />
 
         <TextView
             android:id="@+id/tv_challenge_description"
@@ -32,8 +33,17 @@
             android:layout_marginTop="@dimen/spacing_xs"
             app:layout_constraintTop_toBottomOf="@id/tv_challenge_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/circular_progress"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.example.myapplication.presentation.common.CircularProgressView
+            android:id="@+id/circular_progress"
+            android:layout_width="@dimen/circular_progress_size"
+            android:layout_height="@dimen/circular_progress_size"
+            app:strokeWidth="@dimen/circular_progress_stroke"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

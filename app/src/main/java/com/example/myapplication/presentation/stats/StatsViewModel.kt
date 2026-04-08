@@ -43,7 +43,12 @@ class StatsViewModel(
         }
     }
 
-    private fun loadHabits() {
+    fun completeDay(title: String) {
+        habitRepository.completeDay(title)
+        loadHabits()
+    }
+
+    fun loadHabits() {
         val items = habitRepository.getChallenges()
         _habits.value = items
 

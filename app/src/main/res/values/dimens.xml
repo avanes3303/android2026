@@ -34,6 +34,11 @@
     <!-- RecyclerView item -->
     <dimen name="item_progress_height">6dp</dimen>
 
+    <!-- Circular Progress -->
+    <dimen name="circular_progress_size">48dp</dimen>
+    <dimen name="circular_progress_stroke">4dp</dimen>
+    <dimen name="circular_progress_text">12sp</dimen>
+
     <!-- Bottom Navigation -->
     <dimen name="bottom_nav_height">56dp</dimen>
 </resources>

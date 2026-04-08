@@ -37,6 +37,7 @@
     <string name="profile_member_since">Участник с %s</string>
     <string name="profile_achievements">Достижения</string>
     <string name="profile_avatar_desc">Аватар пользователя</string>
+    <string name="profile_dark_theme">Тёмная тема</string>
 
     <!-- Detail screen -->
     <string name="detail_category">Категория: %s</string>

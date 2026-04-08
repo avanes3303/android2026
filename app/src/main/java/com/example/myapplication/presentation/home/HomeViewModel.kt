@@ -17,7 +17,7 @@ class HomeViewModel(
         loadChallenges()
     }
 
-    private fun loadChallenges() {
+    fun loadChallenges() {
         _challenges.value = repository.getChallenges()
     }
 

@@ -82,8 +82,7 @@
             android:layout_marginTop="@dimen/spacing_sm"
             app:layout_constraintTop_toBottomOf="@id/tv_achievements_label"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
                 android:id="@+id/ll_stats_container"
@@ -92,6 +91,19 @@
                 android:orientation="vertical" />
 
         </com.google.android.material.card.MaterialCardView>
+
+        <!-- Переключатель тёмной темы -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_dark_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_dark_theme"
+            android:layout_marginTop="@dimen/spacing_xl"
+            style="@style/TextStyle.Body"
+            app:layout_constraintTop_toBottomOf="@id/card_stats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

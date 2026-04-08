@@ -2,7 +2,6 @@ package com.example.myapplication.presentation.stats.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -45,20 +44,10 @@ class HabitAdapter(
             binding.tvHabitStreak.text = binding.root.context.getString(
                 R.string.stats_streak_days, item.streakDays
             )
-            binding.tvHabitPercent.text = binding.root.context.getString(
-                R.string.stats_percent_format, item.completionPercent
-            )
-            binding.tvHabitPercent.setTextColor(
-                ContextCompat.getColor(binding.root.context, completionColorRes(item.completionPercent))
-            )
+            binding.circularProgress.setProgress(item.completionPercent)
             binding.progressHabit.progress = item.completionPercent
         }
 
-        private fun completionColorRes(percent: Int): Int = when {
-            percent >= 80 -> R.color.completion_high
-            percent >= 50 -> R.color.completion_medium
-            else -> R.color.completion_low
-        }
     }
 }
 

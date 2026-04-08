@@ -39,6 +39,7 @@ class ChallengeAdapter(
         fun bind(item: HabitDisplayItem) {
             binding.tvChallengeTitle.text = "${item.emoji} ${item.title}"
             binding.tvChallengeDescription.text = item.description
+            binding.circularProgress.setProgress(item.completionPercent)
         }
     }
 }

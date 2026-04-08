@@ -22,7 +22,7 @@
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_habit_percent"
+            app:layout_constraintEnd_toStartOf="@id/circular_progress"
             android:layout_marginEnd="@dimen/spacing_sm" />
 
         <!-- Стрик -->
@@ -34,14 +34,14 @@
             android:layout_marginTop="@dimen/spacing_xs"
             app:layout_constraintTop_toBottomOf="@id/tv_habit_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_habit_percent" />
+            app:layout_constraintEnd_toStartOf="@id/circular_progress" />
 
-        <!-- Процент -->
-        <TextView
-            android:id="@+id/tv_habit_percent"
-            style="@style/TextStyle.Percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <!-- Круговой прогресс -->
+        <com.example.myapplication.presentation.common.CircularProgressView
+            android:id="@+id/circular_progress"
+            android:layout_width="@dimen/circular_progress_size"
+            android:layout_height="@dimen/circular_progress_size"
+            app:strokeWidth="@dimen/circular_progress_stroke"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/progress_habit"
             app:layout_constraintEnd_toEndOf="parent" />

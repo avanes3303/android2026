@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentProfileBinding
 import com.example.myapplication.domain.model.ProfileStat
@@ -26,6 +27,12 @@ class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by viewModels {
         ViewModelFactory(requireContext())
     }
+    // жизненный цикл view
+    // request layout от invalidate
+    // data bining от view binding
+    // чем отличается dp от sp
+    // ContextCompat vs Context
+    // View vs ViewGroup
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +52,20 @@ class ProfileFragment : Fragment() {
             binding.tvProfileName.text = profile.name
             binding.tvProfileSince.text = getString(R.string.profile_member_since, profile.memberSince)
             populateStats(profile.stats)
+        }
+
+        setupThemeSwitch()
+    }
+
+    private fun setupThemeSwitch() {
+        val isNight = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+        binding.switchDarkTheme.isChecked = isNight
+
+        binding.switchDarkTheme.setOnCheckedChangeListener { _, checked ->
+            AppCompatDelegate.setDefaultNightMode(
+                if (checked) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
         }
     }
 

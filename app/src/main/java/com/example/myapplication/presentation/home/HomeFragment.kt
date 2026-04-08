@@ -64,6 +64,11 @@ class HomeFragment : Fragment() {
         observeViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadChallenges()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d(TAG, "onDestroyView")

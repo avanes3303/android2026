@@ -1,10 +1,12 @@
 package com.example.myapplication.presentation.stats
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,6 +30,15 @@ class StatsFragment : Fragment() {
         ViewModelFactory(requireContext())
     }
 
+    private val detailLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val title = result.data?.getStringExtra(DetailActivity.EXTRA_TITLE) ?: return@registerForActivityResult
+            viewModel.completeDay(title)
+        }
+    }
+
     private lateinit var habitAdapter: HabitAdapter
 
     override fun onCreateView(
@@ -49,6 +60,11 @@ class StatsFragment : Fragment() {
         observeViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadHabits()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d(TAG, "onDestroyView")
@@ -57,7 +73,7 @@ class StatsFragment : Fragment() {
 
     private fun setupRecyclerView() {
         habitAdapter = HabitAdapter { item ->
-            startActivity(
+            detailLauncher.launch(
                 DetailActivity.newIntent(
                     requireContext(), item.emoji, item.title, item.description,
                     item.category, item.targetDays, item.streakDays, item.completionPercent
