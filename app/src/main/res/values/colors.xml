@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">@color/ds_primary</color>
+    <color name="primary_variant">@color/ds_primary_variant</color>
+    <color name="on_primary">@color/ds_on_primary</color>
+
+    <color name="secondary">@color/ds_secondary</color>
+    <color name="secondary_variant">@color/ds_secondary_variant</color>
+    <color name="on_secondary">@color/ds_on_secondary</color>
+
+    <color name="background">@color/ds_background</color>
+    <color name="surface">@color/ds_surface</color>
+    <color name="on_background">@color/ds_on_background</color>
+    <color name="on_surface">@color/ds_on_surface</color>
+    <color name="on_surface_variant">@color/ds_on_surface_variant</color>
+
+    <color name="error">@color/ds_error</color>
+    <color name="on_error">@color/ds_on_error</color>
+    <color name="success">@color/ds_success</color>
+    <color name="warning">@color/ds_warning</color>
+
+    <color name="primary_container">@color/ds_primary_container</color>
+    <color name="on_primary_container">@color/ds_on_primary_container</color>
+    <color name="secondary_container">@color/ds_secondary_container</color>
+    <color name="surface_variant">@color/ds_surface_variant</color>
+
+    <color name="completion_high">@color/ds_completion_high</color>
+    <color name="completion_medium">@color/ds_completion_medium</color>
+    <color name="completion_low">@color/ds_completion_low</color>
+
+    <color name="nav_selected">@color/ds_nav_selected</color>
+    <color name="nav_unselected">@color/ds_nav_unselected</color>
+</resources>

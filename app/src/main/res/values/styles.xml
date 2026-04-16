@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextStyle" parent="DsTextStyle" />
+    <style name="TextStyle.ScreenTitle" parent="DsTextStyle.ScreenTitle" />
+    <style name="TextStyle.SectionTitle" parent="DsTextStyle.SectionTitle" />
+    <style name="TextStyle.Body" parent="DsTextStyle.Body" />
+    <style name="TextStyle.Caption" parent="DsTextStyle.Caption" />
+    <style name="TextStyle.Percent" parent="DsTextStyle.Percent" />
+    <style name="TextStyle.SummaryValue" parent="DsTextStyle.SummaryValue" />
+    <style name="CardStyle" parent="DsCardStyle" />
+    <style name="CardStyle.Primary" parent="DsCardStyle.Primary" />
+</resources>
