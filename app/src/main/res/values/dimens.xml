@@ -1,44 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Screen padding -->
-    <dimen name="screen_padding">16dp</dimen>
-    <dimen name="screen_padding_vertical">8dp</dimen>
+    <!-- From design system -->
+    <dimen name="screen_padding">@dimen/ds_screen_padding</dimen>
+    <dimen name="screen_padding_vertical">@dimen/ds_screen_padding_vertical</dimen>
 
-    <!-- Card -->
-    <dimen name="card_padding">16dp</dimen>
-    <dimen name="card_corner_radius">12dp</dimen>
-    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_padding">@dimen/ds_card_padding</dimen>
+    <dimen name="card_corner_radius">@dimen/ds_card_corner_radius</dimen>
+    <dimen name="card_elevation">@dimen/ds_card_elevation</dimen>
 
-    <!-- Spacing -->
-    <dimen name="spacing_xs">4dp</dimen>
-    <dimen name="spacing_sm">8dp</dimen>
-    <dimen name="spacing_md">12dp</dimen>
-    <dimen name="spacing_lg">16dp</dimen>
-    <dimen name="spacing_xl">24dp</dimen>
+    <dimen name="spacing_xs">@dimen/ds_spacing_xs</dimen>
+    <dimen name="spacing_sm">@dimen/ds_spacing_sm</dimen>
+    <dimen name="spacing_md">@dimen/ds_spacing_md</dimen>
+    <dimen name="spacing_lg">@dimen/ds_spacing_lg</dimen>
+    <dimen name="spacing_xl">@dimen/ds_spacing_xl</dimen>
 
-    <!-- Text sizes -->
-    <dimen name="text_title">28sp</dimen>
-    <dimen name="text_heading">24sp</dimen>
-    <dimen name="text_subheading">18sp</dimen>
-    <dimen name="text_body">16sp</dimen>
-    <dimen name="text_body_small">14sp</dimen>
-    <dimen name="text_caption">12sp</dimen>
+    <dimen name="text_title">@dimen/ds_text_title</dimen>
+    <dimen name="text_heading">@dimen/ds_text_heading</dimen>
+    <dimen name="text_subheading">@dimen/ds_text_subheading</dimen>
+    <dimen name="text_body">@dimen/ds_text_body</dimen>
+    <dimen name="text_body_small">@dimen/ds_text_body_small</dimen>
+    <dimen name="text_caption">@dimen/ds_text_caption</dimen>
+    <dimen name="text_percent">@dimen/ds_text_percent</dimen>
+    <dimen name="text_summary_value">@dimen/ds_text_summary_value</dimen>
+
+    <dimen name="circular_progress_size">@dimen/ds_circular_progress_size</dimen>
+    <dimen name="circular_progress_stroke">@dimen/ds_circular_progress_stroke</dimen>
+    <dimen name="circular_progress_text">@dimen/ds_circular_progress_text</dimen>
+
+    <!-- App-specific (not in design system) -->
     <dimen name="text_clock">40sp</dimen>
-    <dimen name="text_percent">22sp</dimen>
-    <dimen name="text_summary_value">20sp</dimen>
-
-    <!-- Avatar -->
     <dimen name="avatar_size">100dp</dimen>
     <dimen name="avatar_emoji_size">48sp</dimen>
-
-    <!-- RecyclerView item -->
     <dimen name="item_progress_height">6dp</dimen>
-
-    <!-- Circular Progress -->
-    <dimen name="circular_progress_size">48dp</dimen>
-    <dimen name="circular_progress_stroke">4dp</dimen>
-    <dimen name="circular_progress_text">12sp</dimen>
-
-    <!-- Bottom Navigation -->
     <dimen name="bottom_nav_height">56dp</dimen>
 </resources>

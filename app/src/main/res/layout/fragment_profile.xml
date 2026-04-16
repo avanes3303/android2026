@@ -92,15 +92,25 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Дневной обзор"
+            android:layout_marginTop="@dimen/spacing_xl"
+            app:layout_constraintTop_toBottomOf="@id/card_stats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <!-- Переключатель тёмной темы -->
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch_dark_theme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/profile_dark_theme"
-            android:layout_marginTop="@dimen/spacing_xl"
+            android:layout_marginTop="@dimen/spacing_sm"
             style="@style/TextStyle.Body"
-            app:layout_constraintTop_toBottomOf="@id/card_stats"
+            app:layout_constraintTop_toBottomOf="@id/btn_overview"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

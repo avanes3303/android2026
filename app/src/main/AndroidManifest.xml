@@ -38,6 +38,11 @@
             android:launchMode="singleTop"
             android:label="@string/detail_title"
             android:parentActivityName=".presentation.main.MainActivity" />
+
+        <activity
+            android:name=".presentation.overview.OverviewActivity"
+            android:exported="false"
+            android:parentActivityName=".presentation.main.MainActivity" />
     </application>
 
 </manifest>

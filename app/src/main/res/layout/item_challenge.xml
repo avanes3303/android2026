@@ -40,7 +40,7 @@
             android:id="@+id/circular_progress"
             android:layout_width="@dimen/circular_progress_size"
             android:layout_height="@dimen/circular_progress_size"
-            app:strokeWidth="@dimen/circular_progress_stroke"
+            app:ds_strokeWidth="@dimen/circular_progress_stroke"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

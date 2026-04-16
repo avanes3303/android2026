@@ -14,6 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentProfileBinding
 import com.example.myapplication.domain.model.ProfileStat
 import com.example.myapplication.presentation.ViewModelFactory
+import com.example.myapplication.presentation.overview.OverviewActivity
 
 class ProfileFragment : Fragment() {
 
@@ -55,6 +56,10 @@ class ProfileFragment : Fragment() {
         }
 
         setupThemeSwitch()
+
+        binding.btnOverview.setOnClickListener {
+            startActivity(OverviewActivity.newIntent(requireContext()))
+        }
     }
 
     private fun setupThemeSwitch() {

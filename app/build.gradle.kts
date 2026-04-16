@@ -35,6 +35,9 @@ android {
 }
 
 dependencies {
+    // Design System
+    implementation(project(":designsystem"))
+
     // AndroidX Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
